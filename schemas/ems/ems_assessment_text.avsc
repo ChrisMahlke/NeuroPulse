@@ -1,0 +1,55 @@
+{
+  "type": "record",
+  "name": "EmsAssessmentText",
+  "namespace": "com.neuropulse.ems",
+  "doc": "Free-text or semi-structured EMS narrative describing the suspected stroke case. All data is synthetic and for demo only.",
+  "fields": [
+    {
+      "name": "case_id",
+      "type": "string",
+      "doc": "Unique identifier for this EMS case / incident (matches vitals and FAST streams)."
+    },
+    {
+      "name": "patient_id",
+      "type": "string",
+      "doc": "Synthetic patient identifier for correlation across topics."
+    },
+    {
+      "name": "ems_unit_id",
+      "type": "string",
+      "doc": "Identifier for the EMS unit or ambulance."
+    },
+    {
+      "name": "assessment_ts",
+      "type": "string",
+      "doc": "Timestamp when this assessment text was recorded (ISO-8601 UTC)."
+    },
+    {
+      "name": "language_code",
+      "type": "string",
+      "default": "en",
+      "doc": "BCP-47 language code for the narrative text (e.g., 'en')."
+    },
+    {
+      "name": "assessment_text",
+      "type": "string",
+      "doc": "EMS narrative describing symptoms, onset, and relevant context."
+    },
+    {
+      "name": "key_phrases",
+      "type": ["null", {
+        "type": "array",
+        "items": "string"
+      }],
+      "default": null,
+      "doc": "Optional extracted key phrases or tags (e.g., 'sudden onset', 'right-sided weakness')."
+    },
+    {
+      "name": "source",
+      "type": ["null", "string"],
+      "default": null,
+      "doc": "Optional source of the text (e.g., 'typed', 'dictated', 'transcribed')."
+    }
+  ]
+}
+

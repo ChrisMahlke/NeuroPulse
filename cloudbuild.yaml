@@ -1,0 +1,12 @@
+steps:
+  # Build the Docker image
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['build', '-f', 'Dockerfile.api', '-t', 'gcr.io/neuropulse-hackathon/neuropulse-api', '.']
+  
+  # Push the image to Container Registry
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['push', 'gcr.io/neuropulse-hackathon/neuropulse-api']
+
+images:
+  - 'gcr.io/neuropulse-hackathon/neuropulse-api'
+

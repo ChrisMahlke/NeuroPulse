@@ -1,0 +1,185 @@
+{
+  "type": "record",
+  "name": "AiPredictionInput",
+  "namespace": "com.neuropulse.ai",
+  "doc": "Feature-enriched event combining EMS vitals, FAST exam, and context for real-time stroke / LVO risk prediction. All data is synthetic and for demo only.",
+  "fields": [
+    {
+      "name": "case_id",
+      "type": "string",
+      "doc": "Unique identifier for this EMS case / incident."
+    },
+    {
+      "name": "patient_id",
+      "type": "string",
+      "doc": "Synthetic patient identifier for correlation across topics."
+    },
+    {
+      "name": "ems_unit_id",
+      "type": "string",
+      "doc": "Identifier for the EMS unit or ambulance."
+    },
+    {
+      "name": "feature_ts",
+      "type": "string",
+      "doc": "Timestamp when this feature vector was assembled (ISO-8601 UTC)."
+    },
+
+    {
+      "name": "age_years",
+      "type": ["null", "int"],
+      "default": null,
+      "doc": "Estimated patient age in years (synthetic)."
+    },
+    {
+      "name": "sex",
+      "type": ["null", {
+        "type": "enum",
+        "name": "BiologicalSex",
+        "symbols": ["MALE", "FEMALE", "UNKNOWN"]
+      }],
+      "default": null,
+      "doc": "Biological sex, if known."
+    },
+
+    {
+      "name": "heart_rate_bpm",
+      "type": ["null", "int"],
+      "default": null,
+      "doc": "Latest heart rate in bpm."
+    },
+    {
+      "name": "systolic_bp_mmHg",
+      "type": ["null", "int"],
+      "default": null,
+      "doc": "Latest systolic blood pressure."
+    },
+    {
+      "name": "diastolic_bp_mmHg",
+      "type": ["null", "int"],
+      "default": null,
+      "doc": "Latest diastolic blood pressure."
+    },
+    {
+      "name": "respiratory_rate_bpm",
+      "type": ["null", "int"],
+      "default": null,
+      "doc": "Latest respiratory rate."
+    },
+    {
+      "name": "spo2_pct",
+      "type": ["null", "int"],
+      "default": null,
+      "doc": "Latest SpO2 percentage."
+    },
+    {
+      "name": "gcs_total",
+      "type": ["null", "int"],
+      "default": null,
+      "doc": "Latest Glasgow Coma Scale total score."
+    },
+    {
+      "name": "blood_glucose_mg_dL",
+      "type": ["null", "int"],
+      "default": null,
+      "doc": "Latest capillary blood glucose, mg/dL."
+    },
+
+    {
+      "name": "face_droop_present",
+      "type": "boolean",
+      "default": false,
+      "doc": "True if FAST face droop is present."
+    },
+    {
+      "name": "arm_weakness_any",
+      "type": "boolean",
+      "default": false,
+      "doc": "True if any arm weakness (left, right, bilateral) is present."
+    },
+    {
+      "name": "speech_abnormal_any",
+      "type": "boolean",
+      "default": false,
+      "doc": "True if any speech abnormality is present."
+    },
+    {
+      "name": "fast_score",
+      "type": ["null", "int"],
+      "default": null,
+      "doc": "Numeric FAST-like score or count of positive findings."
+    },
+
+    {
+      "name": "minutes_since_symptom_onset",
+      "type": ["null", "int"],
+      "default": null,
+      "doc": "Approximate minutes since reported symptom onset (if known)."
+    },
+    {
+      "name": "minutes_since_last_known_well",
+      "type": ["null", "int"],
+      "default": null,
+      "doc": "Approximate minutes since last known well (if known)."
+    },
+
+    {
+      "name": "distance_km_to_nearest_primary_center",
+      "type": ["null", "float"],
+      "default": null,
+      "doc": "Approximate distance in km to the nearest primary stroke center."
+    },
+    {
+      "name": "distance_km_to_nearest_comprehensive_center",
+      "type": ["null", "float"],
+      "default": null,
+      "doc": "Approximate distance in km to the nearest comprehensive / thrombectomy-capable center."
+    },
+    {
+      "name": "estimated_travel_min_to_primary_center",
+      "type": ["null", "int"],
+      "default": null,
+      "doc": "Estimated travel time in minutes to the nearest primary stroke center."
+    },
+    {
+      "name": "estimated_travel_min_to_comprehensive_center",
+      "type": ["null", "int"],
+      "default": null,
+      "doc": "Estimated travel time in minutes to the nearest comprehensive center."
+    },
+
+    {
+      "name": "primary_center_additional_door_to_needle_min",
+      "type": ["null", "int"],
+      "default": null,
+      "doc": "Estimated additional door-to-needle time at the primary center (from hospital.capacity)."
+    },
+    {
+      "name": "comprehensive_center_additional_door_to_needle_min",
+      "type": ["null", "int"],
+      "default": null,
+      "doc": "Estimated additional door-to-needle time at the comprehensive center (from hospital.capacity)."
+    },
+
+    {
+      "name": "ems_suspected_stroke",
+      "type": "boolean",
+      "default": true,
+      "doc": "Whether EMS flags this as a suspected stroke."
+    },
+    {
+      "name": "ems_suspected_lvo",
+      "type": "boolean",
+      "default": false,
+      "doc": "Whether EMS suspects a large vessel occlusion (optional flag)."
+    },
+
+    {
+      "name": "features_version",
+      "type": "string",
+      "default": "v1",
+      "doc": "Version identifier for this feature schema / transformation logic."
+    }
+  ]
+}
+

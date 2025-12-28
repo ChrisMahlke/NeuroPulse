@@ -1,0 +1,109 @@
+{
+  "type": "record",
+  "name": "EmsFastExam",
+  "namespace": "com.neuropulse.ems",
+  "doc": "Structured FAST stroke assessment performed by EMS. All data is synthetic and for demo only.",
+  "fields": [
+    {
+      "name": "case_id",
+      "type": "string",
+      "doc": "Unique identifier for this EMS case / incident (matches vitals stream)."
+    },
+    {
+      "name": "patient_id",
+      "type": "string",
+      "doc": "Synthetic patient identifier for correlation across topics."
+    },
+    {
+      "name": "ems_unit_id",
+      "type": "string",
+      "doc": "Identifier for the EMS unit or ambulance."
+    },
+    {
+      "name": "exam_ts",
+      "type": "string",
+      "doc": "Timestamp when the FAST exam was performed (ISO-8601 UTC)."
+    },
+
+    {
+      "name": "face_droop",
+      "type": {
+        "type": "enum",
+        "name": "FaceDroop",
+        "symbols": ["ABSENT", "PRESENT", "UNKNOWN"]
+      },
+      "doc": "Facial droop observed during exam."
+    },
+    {
+      "name": "arm_weakness",
+      "type": {
+        "type": "enum",
+        "name": "ArmWeakness",
+        "symbols": ["ABSENT", "LEFT", "RIGHT", "BILATERAL", "UNKNOWN"]
+      },
+      "doc": "Arm weakness or drift during exam."
+    },
+    {
+      "name": "speech_difficulty",
+      "type": {
+        "type": "enum",
+        "name": "SpeechDifficulty",
+        "symbols": ["ABSENT", "DYSARTHRIA", "APHASIA_SUSPECTED", "UNKNOWN"]
+      },
+      "doc": "Speech abnormality, if any."
+    },
+
+    {
+      "name": "symptom_onset_ts",
+      "type": ["null", "string"],
+      "default": null,
+      "doc": "Reported time of symptom onset (ISO-8601 UTC), if known."
+    },
+    {
+      "name": "last_known_well_ts",
+      "type": ["null", "string"],
+      "default": null,
+      "doc": "Last time the patient was known to be well (ISO-8601 UTC), if known."
+    },
+
+    {
+      "name": "prestroke_disability",
+      "type": ["null", "int"],
+      "default": null,
+      "doc": "Optional pre-stroke disability scale (e.g., mRS 0–5), if known."
+    },
+
+    {
+      "name": "suspected_stroke_side",
+      "type": ["null", {
+        "type": "enum",
+        "name": "SuspectedStrokeSide",
+        "symbols": ["LEFT", "RIGHT", "POSTERIOR", "UNKNOWN"]
+      }],
+      "default": null,
+      "doc": "Side of the brain suspected to be affected, if EMS infers it."
+    },
+
+    {
+      "name": "fast_score",
+      "type": ["null", "int"],
+      "default": null,
+      "doc": "Optional numeric FAST-like score or count of positive findings."
+    },
+
+    {
+      "name": "ems_suspected_stroke",
+      "type": "boolean",
+      "default": true,
+      "doc": "Whether EMS believes this is a stroke call."
+    },
+
+    {
+      "name": "notes",
+      "type": ["null", "string"],
+      "default": null,
+      "doc": "Short structured notes or flags (e.g., anticoagulant use, seizure at onset)."
+    }
+  ]
+}
+

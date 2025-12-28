@@ -1,0 +1,135 @@
+{
+  "type": "record",
+  "name": "AiPredictionOutput",
+  "namespace": "com.neuropulse.ai",
+  "doc": "Real-time stroke and LVO risk predictions plus routing recommendations and AI-generated explanations. All data is synthetic and for demo only.",
+  "fields": [
+    {
+      "name": "prediction_id",
+      "type": "string",
+      "doc": "Unique identifier for this prediction event."
+    },
+    {
+      "name": "case_id",
+      "type": "string",
+      "doc": "EMS case / incident identifier (matches input streams)."
+    },
+    {
+      "name": "patient_id",
+      "type": "string",
+      "doc": "Synthetic patient identifier for correlation across topics."
+    },
+    {
+      "name": "prediction_ts",
+      "type": "string",
+      "doc": "Timestamp when this prediction was generated (ISO-8601 UTC)."
+    },
+
+    {
+      "name": "model_name",
+      "type": "string",
+      "doc": "Name of the primary prediction model (e.g., 'stroke_risk_v1')."
+    },
+    {
+      "name": "model_version",
+      "type": "string",
+      "doc": "Version of the prediction model."
+    },
+
+    {
+      "name": "stroke_probability",
+      "type": ["null", "float"],
+      "default": null,
+      "doc": "Predicted probability of acute ischemic stroke (0.0–1.0)."
+    },
+    {
+      "name": "lvo_probability",
+      "type": ["null", "float"],
+      "default": null,
+      "doc": "Predicted probability of large vessel occlusion (0.0–1.0)."
+    },
+    {
+      "name": "risk_category",
+      "type": {
+        "type": "enum",
+        "name": "RiskCategory",
+        "symbols": ["LOW", "MODERATE", "HIGH", "CRITICAL"]
+      },
+      "doc": "Bucketed risk category based on probabilities and timing."
+    },
+
+    {
+      "name": "recommended_destination_hospital_id",
+      "type": ["null", "string"],
+      "default": null,
+      "doc": "Hospital ID recommended as the destination for this patient."
+    },
+    {
+      "name": "recommended_destination_type",
+      "type": ["null", {
+        "type": "enum",
+        "name": "RecommendedDestinationType",
+        "symbols": ["PRIMARY_CENTER", "COMPREHENSIVE_CENTER", "THROMBECTOMY_CAPABLE", "UNKNOWN"]
+      }],
+      "default": null,
+      "doc": "Type of the recommended destination hospital."
+    },
+    {
+      "name": "estimated_travel_min_to_recommended",
+      "type": ["null", "int"],
+      "default": null,
+      "doc": "Estimated travel time in minutes to the recommended hospital."
+    },
+    {
+      "name": "estimated_additional_door_to_needle_min_at_recommended",
+      "type": ["null", "int"],
+      "default": null,
+      "doc": "Estimated additional door-to-needle delay at the recommended hospital."
+    },
+
+    {
+      "name": "time_window_assessment",
+      "type": ["null", "string"],
+      "default": null,
+      "doc": "High-level assessment of treatment window (e.g., 'Within IV tPA window', 'Within EVT window', 'Outside typical windows')."
+    },
+
+    {
+      "name": "top_risk_factors",
+      "type": ["null", {
+        "type": "array",
+        "items": "string"
+      }],
+      "default": null,
+      "doc": "List of key contributing factors (e.g., 'face droop', 'arm weakness', 'high NIHSS proxy')."
+    },
+
+    {
+      "name": "llm_explanation_summary",
+      "type": ["null", "string"],
+      "default": null,
+      "doc": "Short natural-language summary from Gemini explaining the decision."
+    },
+    {
+      "name": "llm_recommended_actions",
+      "type": ["null", "string"],
+      "default": null,
+      "doc": "LLM-generated recommended next actions for EMS / ED (e.g., notify stroke team, bypass certain hospitals)."
+    },
+
+    {
+      "name": "llm_model_name",
+      "type": ["null", "string"],
+      "default": null,
+      "doc": "Name of the LLM used for explanations (e.g., 'gemini-1.5-pro')."
+    },
+
+    {
+      "name": "explanation_version",
+      "type": "string",
+      "default": "v1",
+      "doc": "Version of the explanation / reasoning template used."
+    }
+  ]
+}
+

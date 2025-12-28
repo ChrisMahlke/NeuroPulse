@@ -1,0 +1,109 @@
+{
+  "type": "record",
+  "name": "EmsVitalsRaw",
+  "namespace": "com.neuropulse.ems",
+  "doc": "Raw real-time vital signs from EMS for suspected stroke patients. All data is synthetic and for demo only.",
+  "fields": [
+    {
+      "name": "case_id",
+      "type": "string",
+      "doc": "Unique identifier for this EMS case / incident."
+    },
+    {
+      "name": "patient_id",
+      "type": "string",
+      "doc": "Synthetic patient identifier for correlation across topics."
+    },
+    {
+      "name": "ems_unit_id",
+      "type": "string",
+      "doc": "Identifier for the EMS unit or ambulance."
+    },
+    {
+      "name": "event_ts",
+      "type": "string",
+      "doc": "Event timestamp in ISO-8601 format (UTC), e.g. 2025-11-18T10:15:30Z."
+    },
+    {
+      "name": "sequence_number",
+      "type": "long",
+      "doc": "Monotonically increasing sequence number for this case's vitals stream."
+    },
+
+    {
+      "name": "heart_rate_bpm",
+      "type": ["null", "int"],
+      "default": null,
+      "doc": "Heart rate in beats per minute."
+    },
+    {
+      "name": "systolic_bp_mmHg",
+      "type": ["null", "int"],
+      "default": null,
+      "doc": "Systolic blood pressure in mmHg."
+    },
+    {
+      "name": "diastolic_bp_mmHg",
+      "type": ["null", "int"],
+      "default": null,
+      "doc": "Diastolic blood pressure in mmHg."
+    },
+    {
+      "name": "respiratory_rate_bpm",
+      "type": ["null", "int"],
+      "default": null,
+      "doc": "Respiratory rate in breaths per minute."
+    },
+    {
+      "name": "spo2_pct",
+      "type": ["null", "int"],
+      "default": null,
+      "doc": "Peripheral oxygen saturation (SpO2) as a percentage."
+    },
+    {
+      "name": "temperature_c",
+      "type": ["null", "float"],
+      "default": null,
+      "doc": "Body temperature in degrees Celsius."
+    },
+
+    {
+      "name": "gcs_total",
+      "type": ["null", "int"],
+      "default": null,
+      "doc": "Glasgow Coma Scale total score (optional, if assessed)."
+    },
+    {
+      "name": "blood_glucose_mg_dL",
+      "type": ["null", "int"],
+      "default": null,
+      "doc": "Capillary blood glucose (optional), mg/dL."
+    },
+
+    {
+      "name": "position",
+      "type": ["null", {
+        "type": "enum",
+        "name": "PatientPosition",
+        "symbols": ["SUPINE", "SITTING", "UNKNOWN"]
+      }],
+      "default": null,
+      "doc": "Patient body position at the time of measurement (optional)."
+    },
+
+    {
+      "name": "is_artifact_suspected",
+      "type": "boolean",
+      "default": false,
+      "doc": "Whether the EMS device or operator suspects signal artifact (e.g., movement)."
+    },
+
+    {
+      "name": "source_device",
+      "type": ["null", "string"],
+      "default": null,
+      "doc": "Optional EMS monitor/device identifier or model."
+    }
+  ]
+}
+

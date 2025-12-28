@@ -1,0 +1,33 @@
+# Dockerfile for API Server
+# Build from project root: docker build -f Dockerfile.api -t neuropulse-api .
+
+FROM python:3.9-slim
+
+WORKDIR /app
+
+# Install system dependencies
+RUN apt-get update && apt-get install -y \
+    gcc \
+    && rm -rf /var/lib/apt/lists/*
+
+# Copy requirements
+COPY stream-processing/requirements.txt ./stream-processing/
+RUN pip install --no-cache-dir -r stream-processing/requirements.txt
+
+# Copy application code (preserve directory structure)
+COPY stream-processing/neuro_pulse_streaming/ ./neuro_pulse_streaming/
+COPY ai_models/ ./ai_models/
+COPY data_generator/ ./data_generator/
+
+# Set Python path to include current directory
+ENV PYTHONPATH=/app
+
+# Change to stream-processing directory structure
+WORKDIR /app
+
+# Expose port
+EXPOSE 8000
+
+# Run API server
+CMD ["python", "-m", "neuro_pulse_streaming.api_server"]
+

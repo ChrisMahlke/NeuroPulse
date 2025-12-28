@@ -1,0 +1,96 @@
+{
+  "type": "record",
+  "name": "HospitalCapacity",
+  "namespace": "com.neuropulse.hospital",
+  "doc": "Real-time capacity and capability information for stroke-receiving hospitals. All data is synthetic and for demo only.",
+  "fields": [
+    {
+      "name": "hospital_id",
+      "type": "string",
+      "doc": "Unique identifier for the hospital."
+    },
+    {
+      "name": "hospital_name",
+      "type": "string",
+      "doc": "Display name for the hospital."
+    },
+    {
+      "name": "updated_ts",
+      "type": "string",
+      "doc": "Timestamp when this capacity snapshot was generated (ISO-8601 UTC)."
+    },
+
+    {
+      "name": "latitude",
+      "type": "double",
+      "doc": "Hospital latitude (for routing and map visualization)."
+    },
+    {
+      "name": "longitude",
+      "type": "double",
+      "doc": "Hospital longitude (for routing and map visualization)."
+    },
+
+    {
+      "name": "stroke_center_level",
+      "type": {
+        "type": "enum",
+        "name": "StrokeCenterLevel",
+        "symbols": ["PRIMARY", "COMPREHENSIVE", "THROMBECTOMY_CAPABLE", "ACUTE_STROKE_READY", "UNKNOWN"]
+      },
+      "doc": "Designated stroke center level for this hospital."
+    },
+    {
+      "name": "has_ct_available",
+      "type": "boolean",
+      "default": true,
+      "doc": "Whether CT scanner is currently available for acute imaging."
+    },
+    {
+      "name": "has_cta_available",
+      "type": "boolean",
+      "default": true,
+      "doc": "Whether CTA (CT angiography) is currently available."
+    },
+    {
+      "name": "can_perform_mechanical_thrombectomy",
+      "type": "boolean",
+      "default": false,
+      "doc": "Whether this hospital can perform mechanical thrombectomy."
+    },
+
+    {
+      "name": "ed_crowding_score",
+      "type": ["null", "int"],
+      "default": null,
+      "doc": "Optional ED crowding metric (e.g., 0–100 scale)."
+    },
+    {
+      "name": "current_stroke_cases_in_ed",
+      "type": ["null", "int"],
+      "default": null,
+      "doc": "Approximate number of active stroke cases in the ED."
+    },
+
+    {
+      "name": "accepting_acute_stroke_now",
+      "type": "boolean",
+      "default": true,
+      "doc": "Whether this hospital is currently accepting acute stroke transfers/arrivals."
+    },
+    {
+      "name": "estimated_additional_door_to_needle_minutes",
+      "type": ["null", "int"],
+      "default": null,
+      "doc": "Estimated additional delay (in minutes) to door-to-needle due to current load, if known."
+    },
+
+    {
+      "name": "notes",
+      "type": ["null", "string"],
+      "default": null,
+      "doc": "Optional operational notes (e.g., 'CT down for maintenance until 14:00 UTC')."
+    }
+  ]
+}
+
