@@ -208,7 +208,7 @@ python3 generate_live_mock_data.py
 
 **Production Mode** (uses Confluent Cloud):
 
-```bash
+```bash 
 cd stream-processing
 python3 generate_live_kafka_data.py
 ```
